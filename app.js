@@ -12,7 +12,7 @@ firebase.initializeApp({
   //.add agregar un id de manera automatica
 
 function guardar(){
-    
+    //swal('Registro','Se ha agregado un nuevo usuario','success'); -> No se muestra la alerta
     var nombre = document.getElementById('nombre').value;
     var apellido = document.getElementById('apellido').value;
     var fecha = document.getElementById('fecha').value;
@@ -46,8 +46,21 @@ db.collection("users").onSnapshot((querySnapshot) => {
             <td>${doc.data().first}</td>
             <td>${doc.data().last}</td>
             <td>${doc.data().born}</td>
+            <td><button class="btn btn-danger" onclick="eliminar('${doc.id}')">Eliminar</button></td>
+            <td><button class="btn btn-warning">Editar</button></td>
         </tr>
         `
     });
 });
-  
+
+//Borrar datos 
+function eliminar(id){
+    swal('Eliminación','Se ha eliminado al usuario','success');
+    db.collection("users").doc(id).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        swal('Error','No se poudo eleminar el dato requerido','error');
+        console.error("Error removing document: ", error);
+    });
+}
+

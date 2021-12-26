@@ -13,6 +13,8 @@
     <!--Firebase-->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!--SweetAlert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   </head>
   <body>
@@ -23,13 +25,15 @@
         <input type="text" id="fecha" placeholder="fecha" class="form-control my-3">
         <button class="btn btn-info" id="boton" onclick="guardar()">Guardar</button>
 
-        <table class="table">
+        <table class="table my-3">
             <thead>
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody id="tabla">
