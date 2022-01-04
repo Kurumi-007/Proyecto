@@ -1,8 +1,12 @@
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
-    apiKey: "AIzaSyDAtbMDI2KSNIuyFbg0V0w5eaZ5FxlYvsA",
+   apiKey: "AIzaSyDAtbMDI2KSNIuyFbg0V0w5eaZ5FxlYvsA",
     authDomain: "prueba-bf929.firebaseapp.com",
-    projectId: "prueba-bf929"
+    projectId: "prueba-bf929",
+    storageBucket: "prueba-bf929.appspot.com",
+    messagingSenderId: "940424741741",
+    appId: "1:940424741741:web:49e7221520f176203a1064",
+    measurementId: "G-LWJT736GZJ"
   });
   //Inicializando 
   var db = firebase.firestore();
@@ -16,17 +20,20 @@ function guardar(){
     var nombre = document.getElementById('nombre').value;
     var apellido = document.getElementById('apellido').value;
     var fecha = document.getElementById('fecha').value;
+    var imagen= document.getElementById('fileButton').value;
 
     db.collection("users").add({
         first: nombre,
         last: apellido,
-        born: fecha
+        born: fecha,
+        image: imagen
     })
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
         document.getElementById('nombre').value = '';
         document.getElementById('apellido').value = '';
         document.getElementById('fecha').value = '';
+        document.getElementById('fileButton').value = '';
     })
     .catch((error) => {
         console.error("Error adding document: ", error);
@@ -48,7 +55,8 @@ db.collection("users").onSnapshot((querySnapshot) => {
             <td>${doc.data().born}</td>
             <td><button class="btn btn-danger" onclick="eliminar('${doc.id}')">Eliminar</button></td>
             <td><button class="btn btn-warning" onclick="editar('${doc.id}','${doc.data().first}','${doc.data().last}','${doc.data().born}')">Editar</button></td>
-        </tr>
+            <td>${doc.data().image}</td>
+            </tr>
         `
     });
 });
